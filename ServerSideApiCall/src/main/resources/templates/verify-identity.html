@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Your Identity</title>
+    
+    <!-- External Stylesheets -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+
+    <!-- Google Fonts for modern typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Adding timezone support via moment.js and moment-timezone -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.43/moment-timezone-with-data.min.js"></script>
+</head>
+<body>
+
+<!-- Include Header Fragment -->
+<div th:replace="fragments/header_loggedin :: header"></div>
+
+<main>
+    <div class="container text-center mt-5 p-5 border rounded shadow-sm bg-white">
+        <h1 class="mb-4">Identity Verification Required</h1>
+        <p class="text-muted">For your security, we need to verify your identity before accessing your account. Your account identification ID is:</p>
+        <p class="alert alert-danger" th:text="${user.bankApiId}">1234-5678-XXXX</p>
+        
+        <p class="text-muted">Please follow the instructions sent to your email address to complete the verification process.</p>
+
+        <!-- Countdown Timer Section -->
+        <div>
+            <h3>Time Remaining to Verify:</h3>
+            <h4 id="countdown-timer" class="text-danger"></h4>
+        </div>
+
+        <!-- Escheatment Law Warning -->
+        <div class="alert alert-warning mt-4">
+            <p>
+                Pursuant to applicable <strong>Escheatment Laws</strong> and the <strong>Uniform Unclaimed Property Act (UUPA)</strong>, your account is at risk of being classified as unclaimed property if it remains inactive and unverified by <strong>October 19, 2024</strong>. 
+                <br><br>
+                Under these laws, financial institutions are required to transfer dormant or unverified accounts to the custody of the state. If you do not take action by the aforementioned date, your account, along with any funds or assets therein, may be subject to escheatment. This means that your assets will be turned over to the state government, where they will be held as unclaimed property. To prevent the forfeiture of your funds and to avoid the complexities of reclaiming escheated property, it is imperative that you complete the identity verification process before the deadline. Failure to do so may result in the loss of direct control over your assets, and you may be required to undergo a state-mandated claim process to recover your property at a later date. Please be advised that once the escheatment process is initiated, you will no longer have access to the account through this institution, and all rights and interests in the property will be transferred to the state in accordance with the law.
+            </p>
+        </div>
+
+        <a href="/support" class="btn btn-primary mt-4">Contact Support</a>
+    </div>
+</main>
+
+<!-- Include Footer Fragment -->
+<div th:replace="fragments/footer :: footer"></div>
+
+<!-- Optional: Adding JS for Bootstrap -->
+<script src="/js/bootstrap.bundle.min.js"></script>
+
+<!-- Countdown Timer Script -->
+<script>
+    // Target date for the countdown (October 19, 2024 at midnight in US Eastern Standard Time)
+    var targetDate = moment.tz("2024-11-19 00:00:00", "America/New_York");
+
+    function updateCountdown() {
+        var now = moment();
+        var duration = moment.duration(targetDate.diff(now));
+
+        if (duration.asSeconds() <= 0) {
+            document.getElementById("countdown-timer").innerHTML = "Time has expired!";
+        } else {
+            var days = Math.floor(duration.asDays());
+            var hours = Math.floor(duration.hours());
+            var minutes = Math.floor(duration.minutes());
+            var seconds = Math.floor(duration.seconds());
+
+            document.getElementById("countdown-timer").innerHTML = days + " days, " + hours + " hours, " 
+                + minutes + " minutes, " + seconds + " seconds";
+        }
+    }
+
+    // Update the countdown every second
+    setInterval(updateCountdown, 1000);
+
+    // Initial call to display immediately when page loads
+    updateCountdown();
+</script>
+
+</body>
+</html>

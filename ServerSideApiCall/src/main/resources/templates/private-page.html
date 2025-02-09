@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank API Interface</title>
+    <script>
+        async function callServerAPI(endpoint, method, params = {}) {
+            const url = new URL(`http://localhost:8081/bank-client/${endpoint}`);
+            Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+
+            const response = await fetch(url, {
+                method: method
+            });
+
+            const data = await response.json();
+            alert(JSON.stringify(data, null, 2));
+        }
+
+        function getAccountBalance() {
+            const accountNumber = document.getElementById('balanceAccountNumber').value;
+            callServerAPI('balance', 'GET', { accountNumber });
+        }
+
+        function transferFunds() {
+            const fromAccount = document.getElementById('fromAccount').value;
+            const toAccount = document.getElementById('toAccount').value;
+            const amount = document.getElementById('transferAmount').value;
+            callServerAPI('transfer', 'POST', { fromAccount, toAccount, amount });
+        }
+
+        function addFunds() {
+            const accountNumber = document.getElementById('addFundsAccountNumber').value;
+            const amount = document.getElementById('addFundsAmount').value;
+            callServerAPI('add-funds', 'POST', { accountNumber, amount });
+        }
+
+        function generateAccounts() {
+            const userId = document.getElementById('generateUserId').value;
+            const numAccounts = document.getElementById('numAccounts').value;
+            callServerAPI('generate-accounts', 'POST', { userId, numAccounts });
+        }
+
+        function addAccount() {
+            const userId = document.getElementById('addAccountUserId').value;
+            const accountNumber = document.getElementById('newAccountNumber').value;
+            const initialBalance = document.getElementById('initialBalance').value;
+            callServerAPI('add-account', 'POST', { userId, accountNumber, initialBalance });
+        }
+
+        function deleteAccount() {
+            const accountId = document.getElementById('deleteAccountId').value;
+            callServerAPI('delete-account', 'DELETE', { accountId });
+        }
+
+        function createUser() {
+            const userName = document.getElementById('userName').value;
+            callServerAPI('create-user', 'POST', { userName });
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Bank API Interface</h1>
+
+    <h2>Get Account Balance</h2>
+    <input type="text" id="balanceAccountNumber" placeholder="Account Number">
+    <button onclick="getAccountBalance()">Get Balance</button>
+
+    <h2>Transfer Funds Between Accounts</h2>
+    <input type="text" id="fromAccount" placeholder="From Account">
+    <input type="text" id="toAccount" placeholder="To Account">
+    <input type="text" id="transferAmount" placeholder="Amount">
+    <button onclick="transferFunds()">Transfer Funds</button>
+
+    <h2>Add Funds to an Account</h2>
+    <input type="text" id="addFundsAccountNumber" placeholder="Account Number">
+    <input type="text" id="addFundsAmount" placeholder="Amount">
+    <button onclick="addFunds()">Add Funds</button>
+
+    <h2>Generate Accounts for a User</h2>
+    <input type="text" id="generateUserId" placeholder="User ID">
+    <input type="text" id="numAccounts" placeholder="Number of Accounts">
+    <button onclick="generateAccounts()">Generate Accounts</button>
+
+    <h2>Add Account to a User</h2>
+    <input type="text" id="addAccountUserId" placeholder="User ID">
+    <input type="text" id="newAccountNumber" placeholder="New Account Number">
+    <input type="text" id="initialBalance" placeholder="Initial Balance">
+    <button onclick="addAccount()">Add Account</button>
+
+    <h2>Delete an Account</h2>
+    <input type="text" id="deleteAccountId" placeholder="Account ID">
+    <button onclick="deleteAccount()">Delete Account</button>
+
+    <h2>Create a New User with a Default Account</h2>
+    <input type="text" id="userName" placeholder="User Name">
+    <button onclick="createUser()">Create User</button>
+</body>
+</html>

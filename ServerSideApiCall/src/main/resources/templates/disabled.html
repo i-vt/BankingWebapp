@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Unavailable - Province 701 Financial</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body class="bg-light">
+
+<!-- Include Header Fragment -->
+<div th:replace="fragments/header :: header"></div>
+
+<main class="container text-center py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body p-5">
+                    <h1 class="text-danger text-uppercase font-weight-bold">Service Unavailable</h1>
+                    <p class="lead mb-4">
+                        This page has been temporarily disabled due to a recent cyber security incident. We are currently taking all necessary steps to secure our systems and protect your personal information.
+                    </p>
+
+                    <h4 class="font-weight-bold">What We're Doing</h4>
+                    <ul class="text-left mb-4">
+                        <li>We have detected a security breach and are working diligently with leading cyber security experts to investigate and contain the issue.</li>
+                        <li>Our teams are implementing enhanced security measures to prevent any future incidents.</li>
+                        <li>We are committed to ensuring that your information is safe and secure during this process.</li>
+                    </ul>
+
+                    <h4 class="font-weight-bold">What You Can Do</h4>
+                    <p class="mb-4">
+                        We recommend that you regularly monitor your account and report any unusual activity to our support team immediately. For assistance or inquiries, please contact us through the methods below.
+                    </p>
+
+                    <a href="/contact" class="btn btn-primary btn-lg mb-3">Contact Support</a>
+                    <br>
+                    <a href="/home" class="btn btn-outline-secondary">Return to Home</a>
+                </div>
+            </div>
+
+            <div class="mt-5">
+                <h5 class="text-muted">We appreciate your understanding and patience as we work to resolve this issue as quickly and securely as possible.</h5>
+                <p class="text-muted small">If you have any questions or concerns, please email us at <a href="mailto:support@province701financial.com" class="text-primary">support@province701financial.com</a> or call 1-800-123-4567.</p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Include Footer Fragment -->
+<div th:replace="fragments/footer :: footer"></div>
+
+<!-- Optional: Adding JS for Bootstrap -->
+<script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

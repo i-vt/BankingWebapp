@@ -1,0 +1,855 @@
+spring.application.name=platform
+
+# H2 Database configuration
+spring.datasource.url=jdbc:h2:mem:testdb
+spring.datasource.driverClassName=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=
+spring.datasource.platform=h2
+spring.datasource.initialization-mode=always
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2-console
+
+# Show SQL queries in the console
+spring.jpa.show-sql=true
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.properties.hibernate.format_sql=true
+
+
+# Error mapping
+server.error.whitelabel.enabled=false
+server.error.include-stacktrace=never
+server.error.path=/error
+spring.mvc.throw-exception-if-no-handler-found=true
+spring.web.resources.add-mappings=false
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Register</title>
+</head>
+<body>
+<h1>Register</h1>
+<form th:action="@{/register}" method="post" th:object="${user}">
+    <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" th:field="*{username}" />
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <input type="text" id="email" th:field="*{email}" />
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" th:field="*{password}" />
+    </div>
+    <button type="submit">Register</button>
+</form>
+
+<!-- Display error message if there is a registration issue -->
+<div th:if="${errorMessage != null}">
+    <p style="color: red;" th:text="${errorMessage}"></p>
+</div>
+
+<a href="/login">Login</a> | <a href="/home">Home</a>
+</body>
+</html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Private Page</title>
+</head>
+<body>
+<h1>This is a private page!</h1>
+<a href="/logout">Logout</a> | <a href="/home">Home</a>
+</body>
+</html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Error Page</title>
+</head>
+<body>
+<h1>An Error Occurred</h1>
+<p>Sorry, something went wrong. Please try again later.</p>
+<a href="/home">Return to Home</a>
+</body>
+</html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+</head>
+<body>
+<h1>Welcome to the Home Page!</h1>
+<a href="/login">Login</a> | <a href="/register">Register</a> | <a href="/public-page">Public Page</a> | <a href="/private-page">Private Page</a>
+</body>
+</html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Public Page</title>
+</head>
+<body>
+<h1>This is a public page!</h1>
+<a href="/home">Home</a>
+</body>
+</html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+</head>
+<body>
+<h1>Login</h1>
+<form th:action="@{/login}" method="post">
+    <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" />
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" />
+    </div>
+    <button type="submit">Login</button>
+</form>
+<a href="/register">Register</a> | <a href="/home">Home</a>
+</body>
+</html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Public Index Page</title>
+</head>
+<body>
+    <h1>Welcome to the Public Index Page!</h1>
+    <p>This page is publicly accessible without login.</p>
+    <a href="/login">Login</a> | <a href="/register">Register</a> | <a href="/public-page">Public Page</a> | <a href="/private-page">Private Page (Requires Login)</a>
+</body>
+</html>
+package com.example.platform.model;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+
+@Entity
+@Table(name = "users")
+public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @NotEmpty
+    private String username;
+
+    @NotEmpty
+    private String password;
+
+    @Email
+    @NotEmpty
+    private String email;
+
+    private boolean enabled = true;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+}
+package com.example.platform.model;
+
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "action_log")
+public class ActionLog {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = true)
+    private User user;  // Nullable for failed logins (non-existent users)
+
+    private String action;
+    private String ipAddress;
+    private LocalDateTime timestamp;
+
+    // New field for capturing attempted usernames for non-existent accounts
+    private String attemptedUsername;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
+
+    public String getIpAddress() {
+        return ipAddress;
+    }
+
+    public void setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getAttemptedUsername() {
+        return attemptedUsername;
+    }
+
+    public void setAttemptedUsername(String attemptedUsername) {
+        this.attemptedUsername = attemptedUsername;
+    }
+}
+package com.example.platform.model;
+
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "login_history")
+public class LoginHistory {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    private String ipAddress;
+    private LocalDateTime loginTime;
+
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getIpAddress() {
+        return ipAddress;
+    }
+
+    public void setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
+    }
+
+    public LocalDateTime getLoginTime() {
+        return loginTime;
+    }
+
+    public void setLoginTime(LocalDateTime loginTime) {
+        this.loginTime = loginTime;
+    }
+}
+package com.example.platform.repository;
+
+import com.example.platform.model.ActionLog;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface ActionLogRepository extends JpaRepository<ActionLog, Long> {
+    // Custom queries can be added here if necessary
+}
+package com.example.platform.repository;
+
+import com.example.platform.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
+    User findByUsername(String username);
+    User findByEmail(String email);  // New method to find user by email
+}
+package com.example.platform.repository;
+
+import com.example.platform.model.LoginHistory;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface LoginHistoryRepository extends JpaRepository<LoginHistory, Long> {
+    // Additional custom queries can go here if needed
+}
+package com.example.platform.config;
+
+import com.example.platform.service.CustomUserDetailsService;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.beans.factory.annotation.Autowired;
+
+@Configuration
+public class SecurityConfig {
+
+    private final CustomUserDetailsService userDetailsService;
+    private final PasswordEncoder passwordEncoder;
+
+    public SecurityConfig(CustomUserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
+        this.userDetailsService = userDetailsService;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/", "/index", "/login", "/register", "/home", "/public-page").permitAll()
+                .requestMatchers("/private-page").authenticated()
+                // Permit access to the H2 console
+                .requestMatchers("/h2-console/**").permitAll()
+                .requestMatchers("/error").permitAll()
+            )
+            .formLogin(form -> form
+                .loginPage("/login")
+                .defaultSuccessUrl("/private-page", true)  // Directly redirect to private page
+                .permitAll()
+            )
+            .logout(logout -> logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/home")
+            )
+            // Disable CSRF and allow H2 console access within a frame
+            .csrf(csrf -> csrf.disable())  // Disable CSRF protection for H2 console access
+            .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin()));  // Allow frame display from the same origin
+
+        return http.build();
+    }
+
+    @Autowired
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
+    }
+}
+package com.example.platform.config;
+
+import com.example.platform.service.ActionLogService;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.http.HttpStatus;
+import org.springframework.ui.Model;
+
+import java.time.LocalDateTime;
+
+@ControllerAdvice
+public class GlobalExceptionHandler {
+
+    @Autowired
+    private ActionLogService actionLogService;
+
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public String handleError(HttpServletRequest request, Exception ex, Model model) {
+        String ipAddress = request.getRemoteAddr();
+        String requestedUrl = request.getRequestURI();
+        
+        // Log the error
+        actionLogService.logAction(null, "Error on page: " + requestedUrl + " - " + ex.getMessage(), ipAddress);
+        
+        // Add error message to model
+        model.addAttribute("errorMessage", ex.getMessage());
+        
+        return "error";  // This corresponds to a Thymeleaf error.html page
+    }
+}
+package com.example.platform.config;
+
+import com.example.platform.service.ActionLogService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.HandlerInterceptor;
+
+import java.time.LocalDateTime;
+
+@Component
+public class RequestLoggingInterceptor implements HandlerInterceptor {
+
+    private final ActionLogService actionLogService;
+
+    public RequestLoggingInterceptor(ActionLogService actionLogService) {
+        this.actionLogService = actionLogService;
+    }
+
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+        String ipAddress = request.getRemoteAddr();
+        String requestedUrl = request.getRequestURI();
+
+        // Log the initial request visit
+        actionLogService.logPageVisit(requestedUrl, ipAddress, LocalDateTime.now());
+
+        return true;  // Continue with the execution of the request
+    }
+
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+                            org.springframework.web.servlet.ModelAndView modelAndView) {
+        if (response.getStatus() == HttpServletResponse.SC_FOUND) {  // SC_FOUND = 302
+            String redirectUrl = response.getHeader("Location");
+            if (redirectUrl != null) {
+                String ipAddress = request.getRemoteAddr();
+                actionLogService.logAction(null, "Redirect to: " + redirectUrl, ipAddress);
+            }
+        }
+    }
+
+}
+package com.example.platform.config;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@Configuration
+public class WebConfig implements WebMvcConfigurer {
+
+    private final RequestLoggingInterceptor requestLoggingInterceptor;
+
+    @Autowired
+    public WebConfig(RequestLoggingInterceptor requestLoggingInterceptor) {
+        this.requestLoggingInterceptor = requestLoggingInterceptor;
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(requestLoggingInterceptor);
+    }
+}
+package com.example.platform.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+@Configuration
+public class EncoderConfig {
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+}
+package com.example.platform;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class PlatformApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(PlatformApplication.class, args);
+	}
+
+}
+package com.example.platform.service;
+
+import com.example.platform.model.User;
+import com.example.platform.repository.LoginHistoryRepository;
+import com.example.platform.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import com.example.platform.model.LoginHistory;
+
+@Service
+public class UserService {
+
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final LoginHistoryRepository loginHistoryRepository;
+    private final ActionLogService actionLogService;
+
+    @Autowired
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder,
+                       LoginHistoryRepository loginHistoryRepository, ActionLogService actionLogService) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.loginHistoryRepository = loginHistoryRepository;
+        this.actionLogService = actionLogService;
+    }
+
+    public User save(User user, String ipAddress) throws Exception {
+        // Check for duplicate username and email
+        if (userRepository.findByUsername(user.getUsername()) != null) {
+            actionLogService.logFailedRegistration(user.getUsername(), user.getEmail(), user.getPassword(), ipAddress);
+            throw new Exception("Username already exists");
+        }
+
+        if (userRepository.findByEmail(user.getEmail()) != null) {
+            actionLogService.logFailedRegistration(user.getUsername(), user.getEmail(), user.getPassword(), ipAddress);
+            throw new Exception("Email already exists");
+        }
+
+        // Encode the password and save the user
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        User savedUser = userRepository.save(user);
+
+        // Log successful registration
+        actionLogService.logAction(savedUser, "register", ipAddress);
+
+        // Save login history
+        saveLoginHistory(savedUser, ipAddress);
+        return savedUser;
+    }
+
+    private void saveLoginHistory(User user, String ipAddress) {
+        LoginHistory loginHistory = new LoginHistory();
+        loginHistory.setUser(user);
+        loginHistory.setIpAddress(ipAddress);
+        loginHistory.setLoginTime(java.time.LocalDateTime.now());  // Set the current time
+        loginHistoryRepository.save(loginHistory);
+    }
+
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+    public void updateLoginInfo(User user, String ipAddress) {
+    // Log login action
+    actionLogService.logAction(user, "login", ipAddress);
+    saveLoginHistory(user, ipAddress);
+    }
+
+
+}
+package com.example.platform.service;
+
+import com.example.platform.model.User;  // Import your own User entity
+import com.example.platform.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+import jakarta.servlet.http.HttpServletRequest;
+
+@Service
+public class CustomUserDetailsService implements UserDetailsService {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private ActionLogService actionLogService;
+
+    @Autowired
+    private HttpServletRequest request;  // To access the client's IP address
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        String ipAddress = request.getRemoteAddr();
+        String password = request.getParameter("password");  // Capture the password entered by the user
+        com.example.platform.model.User user = userRepository.findByUsername(username);  // Use fully qualified name
+
+        if (user == null) {
+            // Log failed login attempt for non-existent username with the provided password
+            actionLogService.logFailedLogin(username, password, ipAddress);  // Updated: removed the "failed login" argument
+            throw new UsernameNotFoundException("User not found");
+        }
+
+        // Fully qualify the Spring Security User class
+        return org.springframework.security.core.userdetails.User.withUsername(username)
+                   .password(user.getPassword())
+                   .roles("USER")
+                   .build();
+    }
+}
+package com.example.platform.service;
+
+import com.example.platform.model.ActionLog;
+import com.example.platform.model.User;
+import com.example.platform.repository.ActionLogRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+
+@Service
+public class ActionLogService {
+
+    private final ActionLogRepository actionLogRepository;
+
+    public void logPageVisit(String pageUrl, String ipAddress, LocalDateTime timestamp) {
+        log("Page Visit: " + pageUrl, ipAddress, null, timestamp, null);
+    }
+
+    @Autowired
+    public ActionLogService(ActionLogRepository actionLogRepository) {
+        this.actionLogRepository = actionLogRepository;
+    }
+
+    // General method to log any action
+    private void log(String action, String ipAddress, User user, LocalDateTime timestamp, String extraDetails) {
+        ActionLog log = new ActionLog();
+        log.setAction(action + (extraDetails != null ? " - " + extraDetails : ""));
+        log.setIpAddress(ipAddress);
+        log.setUser(user);
+        log.setTimestamp(timestamp);
+        actionLogRepository.save(log);
+    }
+
+    // Method to log user actions like registration or login
+    public void logAction(User user, String action, String ipAddress) {
+        log(action, ipAddress, user, LocalDateTime.now(), null);
+    }
+
+    // Method to log failed registration attempts with username, email, and password
+    public void logFailedRegistration(String attemptedUsername, String attemptedEmail, String attemptedPassword, String ipAddress) {
+        String extraDetails = "Attempted Username: " + attemptedUsername + ", Email: " + attemptedEmail + 
+                              ", Password: " + attemptedPassword;
+        log("Failed Registration", ipAddress, null, LocalDateTime.now(), extraDetails);
+    }
+    public void logFailedLogin(String attemptedUsername, String attemptedPassword, String ipAddress) {
+    String extraDetails = "Attempted Username: " + attemptedUsername + ", Password: " + attemptedPassword;
+    log("Failed Login", ipAddress, null, LocalDateTime.now(), extraDetails);
+}
+
+}
+package com.example.platform.controller;
+
+import com.example.platform.model.User;
+import com.example.platform.service.UserService;
+import com.example.platform.service.ActionLogService;  // Import ActionLogService
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import jakarta.validation.Valid;
+
+@Controller
+public class PageController {
+
+    private final UserService userService;
+    private final ActionLogService actionLogService;  // Declare ActionLogService
+
+    // Constructor-based dependency injection (recommended)
+    @Autowired
+    public PageController(UserService userService, ActionLogService actionLogService) {
+        this.userService = userService;
+        this.actionLogService = actionLogService;  // Inject ActionLogService
+    }
+
+    @GetMapping("/")
+    public String redirectToIndex() {
+        return "index";  // Corresponds to index.html
+    }
+
+    @GetMapping("/home")
+    public String home() {
+        return "home";  // Corresponds to home.html
+    }
+
+    @GetMapping("/public-page")
+    public String publicPage() {
+        return "public-page";  // Corresponds to public-page.html
+    }
+
+    @GetMapping("/private-page")
+    public String privatePage(Authentication authentication, HttpServletRequest request) {
+        if (authentication != null) {
+            String username = authentication.getName();
+            User user = userService.findByUsername(username);
+            if (user != null) {
+                String ipAddress = request.getRemoteAddr();
+                userService.updateLoginInfo(user, ipAddress);  // Call updateLoginInfo in UserService
+                actionLogService.logAction(user, "login", ipAddress);  // Log login action
+            }
+        }
+        return "private-page";  // Corresponds to private-page.html
+    }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";  // Corresponds to login.html
+    }
+
+    @GetMapping("/register")
+    public String showRegistrationForm(Model model) {
+        model.addAttribute("user", new User());
+        return "register";  // Corresponds to register.html
+    }
+
+    @PostMapping("/register")
+    public String registerUser(@Valid User user, BindingResult result, HttpServletRequest request, Model model) {
+        if (result.hasErrors()) {
+            // Add error message if validation fails
+            model.addAttribute("errorMessage", "Please correct the errors in the form.");
+            return "register";
+        }
+
+        String ipAddress = request.getRemoteAddr();  // Capture IP address of the request
+        try {
+            // Attempt to save the user and log their IP address
+            userService.save(user, ipAddress);
+            return "redirect:/login";
+        } catch (Exception e) {
+            // Log the failed registration and show the error message
+            model.addAttribute("errorMessage", e.getMessage());
+            return "register";  // Reload the registration page with the error message
+        }
+    }
+}
+# Netscape HTTP Cookie File
+# https://curl.se/docs/http-cookies.html
+# This file was generated by libcurl! Edit at your own risk.
+
+#HttpOnly_localhost	FALSE	/	FALSE	0	JSESSIONID	84679360CB23E159D5600DAE3B65C41B
+package com.example.platform;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class PlatformApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
+.
+├── cookie.txt
+├── main
+│   ├── java
+│   │   └── com
+│   │       └── example
+│   │           └── platform
+│   │               ├── config
+│   │               │   ├── EncoderConfig.java
+│   │               │   ├── GlobalExceptionHandler.java
+│   │               │   ├── RequestLoggingInterceptor.java
+│   │               │   ├── SecurityConfig.java
+│   │               │   └── WebConfig.java
+│   │               ├── controller
+│   │               │   └── PageController.java
+│   │               ├── model
+│   │               │   ├── ActionLog.java
+│   │               │   ├── LoginHistory.java
+│   │               │   └── User.java
+│   │               ├── PlatformApplication.java
+│   │               ├── repository
+│   │               │   ├── ActionLogRepository.java
+│   │               │   ├── LoginHistoryRepository.java
+│   │               │   └── UserRepository.java
+│   │               └── service
+│   │                   ├── ActionLogService.java
+│   │                   ├── CustomUserDetailsService.java
+│   │                   └── UserService.java
+│   └── resources
+│       ├── application.properties
+│       └── templates
+│           ├── error.html
+│           ├── home.html
+│           ├── index.html
+│           ├── login.html
+│           ├── private-page.html
+│           ├── public-page.html
+│           └── register.html
+├── output.txt
+└── test
+    └── java
+        └── com
+            └── example
+                └── platform
+                    └── PlatformApplicationTests.java
+
+18 directories, 27 files

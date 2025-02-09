@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disclosures - Province 701 Financial</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body class="bg-light">
+
+<!-- Include Header Fragment -->
+<div th:replace="fragments/header :: header"></div>
+
+<main class="container py-5">
+    <h1 class="text-uppercase text-center font-weight-bold mb-4">Important Disclosures</h1>
+
+    <section class="mb-5">
+        <h2 class="font-weight-bold">1. General Disclosures</h2>
+        <p>
+            The information provided on this website is for general informational purposes only and is not intended as financial, investment, or legal advice. All products and services offered by Province 701 Financial are subject to applicable terms and conditions. Province 701 Financial makes no warranties or representations regarding the accuracy or completeness of the information on this website.
+        </p>
+    </section>
+
+    <section class="mb-5">
+        <h2 class="font-weight-bold">2. Banking Services and FDIC Insurance</h2>
+        <p>
+            Province 701 Financial is a member of the Federal Deposit Insurance Corporation (FDIC). Deposits held in FDIC-insured accounts are insured up to the maximum limit allowed by law. For more information on FDIC insurance coverage, please visit the <a href="https://www.fdic.gov/" target="_blank" class="text-primary">FDIC website</a>.
+        </p>
+    </section>
+
+    <section class="mb-5">
+        <h2 class="font-weight-bold">3. Investment Services Disclosure</h2>
+        <p>
+            Investment products and services offered by Province 701 Financial are:
+        </p>
+        <ul>
+            <li>Not FDIC Insured</li>
+            <li>Not Bank Guaranteed</li>
+            <li>May Lose Value</li>
+        </ul>
+        <p>
+            Investing involves risk, including the possible loss of principal. Before investing, consider your financial objectives and consult with a financial advisor.
+        </p>
+    </section>
+
+    <section class="mb-5">
+        <h2 class="font-weight-bold">4. Interest Rates and Fees</h2>
+        <p>
+            Interest rates, fees, and other terms applicable to the products and services offered by Province 701 Financial are subject to change. Please refer to the relevant product documentation, terms, and conditions, or contact us directly for the most up-to-date information.
+        </p>
+    </section>
+
+    <section class="mb-5">
+        <h2 class="font-weight-bold">5. Electronic Communication Disclosure</h2>
+        <p>
+            By using this website, you agree to receive communications from us electronically. You consent to receive all notices and other communications from Province 701 Financial electronically, including by email, text message, or website notifications.
+        </p>
+        <p>
+            You are responsible for maintaining accurate contact information and ensuring that you can receive communications from us. We are not liable for any failure to receive electronic communications due to inaccurate or outdated contact information.
+        </p>
+    </section>
+
+    <section class="mb-5">
+        <h2 class="font-weight-bold">6. Online and Mobile Banking</h2>
+        <p>
+            Province 701 Financial offers online and mobile banking services for the convenience of our customers. However, the availability of these services may be interrupted from time to time due to scheduled maintenance, system outages, or other factors beyond our control.
+        </p>
+        <p>
+            Province 701 Financial is not responsible for any losses or damages arising from the unavailability of our online or mobile banking services. Please notify us immediately if you experience any issues with your access to these services.
+        </p>
+    </section>
+
+    <section class="mb-5">
+        <h2 class="font-weight-bold">7. Third-Party Links</h2>
+        <p>
+            This website may contain links to third-party websites. These links are provided for your convenience, and Province 701 Financial does not control or endorse the content of third-party websites. We are not responsible for the accuracy or legality of any content on third-party websites.
+        </p>
+        <p>
+            You are subject to the terms and privacy policies of third-party websites when you access them via links from this website.
+        </p>
+    </section>
+
+    <section class="mb-5">
+        <h2 class="font-weight-bold">8. Changes to Disclosures</h2>
+        <p>
+            Province 701 Financial reserves the right to update or modify these disclosures at any time. Any changes will be effective immediately upon posting on this page. Please review these disclosures periodically to ensure that you understand our practices.
+        </p>
+    </section>
+
+    <section class="mb-5">
+        <h2 class="font-weight-bold">9. Contact Information</h2>
+        <p>
+            If you have any questions about these disclosures or need additional information, please contact us at <a href="mailto:disclosures@province701financial.com" class="text-primary">disclosures@province701financial.com</a> or call us at 1-800-123-4567.
+        </p>
+    </section>
+
+    <div class="text-center mt-4">
+        <a href="/home" class="btn btn-outline-primary btn-lg">Return to Home</a>
+    </div>
+
+</main>
+
+<!-- Include Footer Fragment -->
+<div th:replace="fragments/footer :: footer"></div>
+
+<!-- Optional: Adding JS for Bootstrap -->
+<script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

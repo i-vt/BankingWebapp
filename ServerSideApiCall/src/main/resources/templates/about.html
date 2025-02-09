@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Province 701 Financial</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body class="bg-light">
+
+<!-- Include Header Fragment -->
+<div th:replace="fragments/header :: header"></div>
+
+<main class="container py-5">
+    <h1 class="text-uppercase text-center font-weight-bold mb-4">About Province 701 Financial</h1>
+
+    <!-- Introduction Section -->
+    <section class="mb-5">
+        <div class="row">
+            <div class="col-lg-6 mb-4">
+                <img src="/images/about_us.jpg" class="img-fluid rounded shadow-sm" alt="About Province 701 Financial">
+            </div>
+            <div class="col-lg-6">
+                <h2 class="font-weight-bold">Who We Are</h2>
+                <p>
+                    Founded in [Year], Province 701 Financial has been committed to providing innovative and personalized financial services to individuals, businesses, and organizations. With decades of experience in the financial industry, we have built a reputation for integrity, transparency, and reliability.
+                </p>
+                <p>
+                    As a customer-focused institution, we are dedicated to understanding your unique needs and offering tailored solutions that help you achieve your financial goals. Whether you're planning for the future, managing day-to-day banking, or seeking strategic business advice, we are here to support you every step of the way.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission and Values Section -->
+    <section class="mb-5">
+        <h2 class="font-weight-bold text-center mb-4">Our Mission and Core Values</h2>
+        <div class="row text-center">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title text-uppercase font-weight-bold">Integrity</h5>
+                        <p class="card-text">We believe in honest, transparent communication and always put our clients' best interests first.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title text-uppercase font-weight-bold">Innovation</h5>
+                        <p class="card-text">We embrace technology and continuously innovate to provide the best possible solutions for our customers.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title text-uppercase font-weight-bold">Customer Focus</h5>
+                        <p class="card-text">Our customers are at the heart of everything we do. We strive to offer personalized services that meet their needs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership Section -->
+    <section class="mb-5">
+        <h2 class="font-weight-bold text-center mb-4">Our Leadership</h2>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img src="/images/ceo.jpg" class="img-fluid rounded-left" alt="CEO">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title font-weight-bold">John Doe</h5>
+                                <p class="card-text">Chief Executive Officer</p>
+                                <p class="card-text">With over 25 years of experience in the financial industry, John Doe leads Province 701 Financial with a vision of innovation, customer excellence, and growth.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img src="/images/cfo.jpg" class="img-fluid rounded-left" alt="CFO">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title font-weight-bold">Jane Smith</h5>
+                                <p class="card-text">Chief Financial Officer</p>
+                                <p class="card-text">Jane Smith oversees the financial operations of Province 701 Financial, ensuring that the institution maintains its financial health and continues to deliver value to its clients.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="mb-5 text-center">
+        <h2 class="font-weight-bold mb-3">Why Choose Province 701 Financial?</h2>
+        <p class="lead mb-4">
+            We are more than just a financial institution – we are your trusted partner. Our personalized approach, combined with industry-leading solutions, ensures that your financial future is in safe hands.
+        </p>
+        <a href="/contact" class="btn btn-outline-primary btn-lg">Get in Touch</a>
+    </section>
+</main>
+
+<!-- Include Footer Fragment -->
+<div th:replace="fragments/footer :: footer"></div>
+
+<!-- Optional: Adding JS for Bootstrap -->
+<script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

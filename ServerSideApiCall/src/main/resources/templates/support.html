@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - Province 701 Financial</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body class="bg-light">
+
+<!-- Include Header Fragment -->
+<div th:replace="fragments/header :: header"></div>
+
+<main class="container py-5">
+    <h1 class="text-uppercase text-center font-weight-bold mb-4">Support Center</h1>
+
+    <section class="mb-5">
+        <p class="text-center lead">
+            At Province 701 Financial, we are here to help. If you have questions or need assistance, explore our support options below.
+        </p>
+    </section>
+
+    <!-- Support Options -->
+    <section class="mb-5">
+        <div class="row">
+            <!-- Contact Us -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-uppercase font-weight-bold">Contact Us</h5>
+                        <p class="card-text">
+                            Have a question or need help? Contact our customer service team for personalized support.
+                        </p>
+                        <p class="mb-2"><strong>Phone:</strong> 1-800-123-4567</p>
+                        <p class="mb-2"><strong>Email:</strong> <a href="mailto:support@province701financial.com" class="text-primary">support@province701financial.com</a></p>
+                        <p><strong>Hours:</strong> Mon-Fri: 9 AM - 6 PM ET</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Frequently Asked Questions -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-uppercase font-weight-bold">Frequently Asked Questions (FAQs)</h5>
+                        <p class="card-text">
+                            Find answers to the most common questions about our services, accounts, and more.
+                        </p>
+                        <a href="/faqs" class="btn btn-primary btn-block">Browse FAQs</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resource Center -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-uppercase font-weight-bold">Resource Center</h5>
+                        <p class="card-text">
+                            Access tools, guides, and articles that will help you navigate your financial journey.
+                        </p>
+                        <a href="/resource-center" class="btn btn-primary btn-block">Visit Resource Center</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Additional Support Section -->
+    <section class="mb-5">
+        <div class="row">
+            <!-- Account Access Issues -->
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold">Account Access Issues</h5>
+                        <p>
+                            If you're having trouble accessing your account, please make sure you are using the correct username and password. If you've forgotten your password, you can reset it via the <a href="/forgot-password" class="text-primary">Forgot Password</a> link.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security & Fraud Prevention -->
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold">Security & Fraud Prevention</h5>
+                        <p>
+                            At Province 701 Financial, your security is our priority. If you suspect fraudulent activity on your account, please contact our fraud prevention team immediately at 1-800-987-6543.
+                        </p>
+                        <a href="/security-fraud" class="text-primary">Learn more about security and fraud prevention</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency Support Section -->
+    <section class="mb-5 text-center">
+        <h2 class="font-weight-bold mb-3">Need Emergency Assistance?</h2>
+        <p class="lead mb-4">For urgent matters outside of our business hours, please call our 24/7 support line at <strong>1-800-555-1234</strong>.</p>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="mb-5 text-center">
+        <h2 class="font-weight-bold mb-3">Still Need Help?</h2>
+        <p class="lead mb-4">
+            Our team is ready to assist you with any questions or concerns. Reach out to us through any of the options above.
+        </p>
+        <a href="/contact" class="btn btn-outline-primary btn-lg">Contact Us</a>
+    </section>
+</main>
+
+<!-- Include Footer Fragment -->
+<div th:replace="fragments/footer :: footer"></div>
+
+<!-- Optional: Adding JS for Bootstrap -->
+<script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

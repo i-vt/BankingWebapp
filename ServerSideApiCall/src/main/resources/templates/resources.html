@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resource Center - Province 701 Financial</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body class="bg-light">
+
+<!-- Include Header Fragment -->
+<div th:replace="fragments/header :: header"></div>
+
+<main class="container py-5">
+    <h1 class="text-uppercase text-center font-weight-bold mb-4">Resource Center</h1>
+
+    <section class="mb-5">
+        <p class="text-center lead">
+            The Province 701 Financial Resource Center provides tools, guides, and articles designed to help you navigate your financial journey with confidence. Explore our collection of resources to make informed decisions about managing, investing, and growing your wealth.
+        </p>
+    </section>
+
+    <!-- Resource Categories Grid -->
+    <section class="mb-5">
+        <div class="row">
+            <!-- Resource 1: Financial Guides -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title text-uppercase font-weight-bold">Financial Guides</h5>
+                        <p class="card-text">
+                            Access comprehensive guides on topics such as budgeting, saving, investing, retirement planning, and debt management.
+                        </p>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <a href="/financial-guides" class="btn btn-primary btn-block">Explore Guides</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resource 2: Financial Tools -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title text-uppercase font-weight-bold">Financial Tools</h5>
+                        <p class="card-text">
+                            Use our calculators and other online tools to make informed decisions about your financial future, including mortgage, loan, and retirement calculators.
+                        </p>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <a href="/financial-tools" class="btn btn-primary btn-block">Access Tools</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resource 3: Market Insights -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title text-uppercase font-weight-bold">Market Insights</h5>
+                        <p class="card-text">
+                            Stay up-to-date with the latest market news and expert insights to help guide your investment decisions and financial strategies.
+                        </p>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <a href="/market-insights" class="btn btn-primary btn-block">View Insights</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Resource 4: Articles and Tips -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title text-uppercase font-weight-bold">Articles and Tips</h5>
+                        <p class="card-text">
+                            Read helpful articles on managing your finances, saving for the future, and making smart investment choices.
+                        </p>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <a href="/articles" class="btn btn-primary btn-block">Browse Articles</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resource 5: Webinars and Events -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title text-uppercase font-weight-bold">Webinars and Events</h5>
+                        <p class="card-text">
+                            Join live or recorded webinars hosted by financial experts to stay informed on the latest trends and best practices in financial management.
+                        </p>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <a href="/webinars-events" class="btn btn-primary btn-block">View Events</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resource 6: FAQs -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title text-uppercase font-weight-bold">Frequently Asked Questions (FAQs)</h5>
+                        <p class="card-text">
+                            Find answers to the most common questions about our products, services, and financial planning.
+                        </p>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <a href="/faqs" class="btn btn-primary btn-block">View FAQs</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="mb-5 text-center">
+        <h2 class="font-weight-bold mb-3">Need Personalized Assistance?</h2>
+        <p class="lead mb-4">
+            Contact our financial experts for personalized advice and support tailored to your unique financial situation.
+        </p>
+        <a href="/contact" class="btn btn-outline-primary btn-lg">Contact Us</a>
+    </section>
+</main>
+
+<!-- Include Footer Fragment -->
+<div th:replace="fragments/footer :: footer"></div>
+
+<!-- Optional: Adding JS for Bootstrap -->
+<script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Province 701 Financial</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body class="bg-light">
+
+<!-- Include Header Fragment -->
+<div th:replace="fragments/header :: header"></div>
+
+<main class="container py-5">
+    <h1 class="text-uppercase text-center font-weight-bold mb-4">Contact Us</h1>
+
+    <!-- Introduction Section -->
+    <section class="mb-5">
+        <p class="text-center lead">
+            We are here to help you with any questions or concerns you may have. Please feel free to reach out to us using the contact details below, or fill out the form and one of our representatives will get back to you shortly.
+        </p>
+    </section>
+
+    <!-- Contact Information Section -->
+    <section class="mb-5">
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <h5 class="text-uppercase font-weight-bold">Head Office</h5>
+                <p>
+                    123 Financial Ave, Suite 456<br>
+                    City, Province, 70100<br>
+                    Phone: 1-800-123-4567<br>
+                    Email: <a href="mailto:support@province701financial.com" class="text-primary">support@province701financial.com</a>
+                </p>
+            </div>
+
+            <div class="col-lg-4 mb-4">
+                <h5 class="text-uppercase font-weight-bold">Customer Support</h5>
+                <p>
+                    Our customer support team is available Monday to Friday, from 9:00 AM to 5:00 PM. We are here to help with any account-related inquiries, technical support, or general information.
+                    <br>
+                    Phone: 1-800-123-4567
+                    <br>
+                    Email: <a href="mailto:help@province701financial.com" class="text-primary">help@province701financial.com</a>
+                </p>
+            </div>
+
+            <div class="col-lg-4 mb-4">
+                <h5 class="text-uppercase font-weight-bold">Follow Us</h5>
+                <p>Stay updated with the latest news and updates from Province 701 Financial by following us on social media:</p>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-primary">LinkedIn</a></li>
+                    <li><a href="#" class="text-primary">Twitter</a></li>
+                    <li><a href="#" class="text-primary">Facebook</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="mb-5">
+        <h2 class="text-uppercase text-center font-weight-bold mb-4">Send Us a Message</h2>
+        <form class="row g-3">
+            <div class="col-md-6">
+                <label for="name" class="form-label font-weight-bold">Full Name</label>
+                <input type="text" class="form-control" id="name" placeholder="Your Full Name" required>
+            </div>
+            <div class="col-md-6">
+                <label for="email" class="form-label font-weight-bold">Email Address</label>
+                <input type="email" class="form-control" id="email" placeholder="Your Email Address" required>
+            </div>
+            <div class="col-md-12">
+                <label for="subject" class="form-label font-weight-bold">Subject</label>
+                <input type="text" class="form-control" id="subject" placeholder="Subject" required>
+            </div>
+            <div class="col-md-12">
+                <label for="message" class="form-label font-weight-bold">Message</label>
+                <textarea class="form-control" id="message" rows="5" placeholder="Your Message" required></textarea>
+            </div>
+            <div class="col-12 text-center">
+                <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
+            </div>
+        </form>
+    </section>
+
+    <!-- Map Section -->
+    <section class="mb-5">
+        <h2 class="text-uppercase text-center font-weight-bold mb-4">Our Location</h2>
+        <!-- Placeholder for Google Map -->
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509441!2d144.95592831531647!3d-37.817209979751704!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577eef5e9803b7!2s123%20Financial%20Ave%2C%20City%2C%20Province%2C%2070100!5e0!3m2!1sen!2s!4v1614740913671!5m2!1sen!2s" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </section>
+</main>
+
+<!-- Include Footer Fragment -->
+<div th:replace="fragments/footer :: footer"></div>
+
+<!-- Optional: Adding JS for Bootstrap -->
+<script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

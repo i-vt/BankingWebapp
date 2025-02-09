@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${pageTitle}">Financial Institution</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+
+<!-- Include Header Fragment -->
+<div th:replace="fragments/header :: header"></div>
+
+<main>
+    <!-- Page-specific content -->
+    <div class="container">
+        <section class="py-5">
+            <div class="container">
+                <div class="row text-center mb-4">
+                    <div class="col">
+                        <h2 class="text-uppercase">Our Financial Offerings</h2>
+                        <p class="lead">Explore a range of services designed to help you achieve your financial goals.</p>
+                    </div>
+                </div>
+
+                <!-- Offerings Grid -->
+                <div class="row">
+
+                    <!-- Offering 1 -->
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card h-100">
+                            <img src="/images/invest.png" class="card-img-top" alt="Investment Planning">
+                            <div class="card-body">
+                                <h5 class="card-title text-uppercase">Investment Planning</h5>
+                                <p class="card-text">
+                                    Tailored investment strategies to help you grow and preserve your wealth.
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="/investment-planning" class="btn btn-primary">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Offering 2 -->
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card h-100">
+                            <img src="/images/retire.png" class="card-img-top" alt="Retirement Solutions">
+                            <div class="card-body">
+                                <h5 class="card-title text-uppercase">Retirement Solutions</h5>
+                                <p class="card-text">
+                                    Secure your future with comprehensive retirement planning services.
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="/retirement-solutions" class="btn btn-primary">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Offering 3 -->
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card h-100">
+                            <img src="/images/wealthmng.png" class="card-img-top" alt="Wealth Management">
+                            <div class="card-body">
+                                <h5 class="card-title text-uppercase">Wealth Management</h5>
+                                <p class="card-text">
+                                    Comprehensive solutions for managing your financial assets effectively.
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="/wealth-management" class="btn btn-primary">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- More Offerings Button -->
+                <div class="row text-center mt-4">
+                    <div class="col">
+                        <a href="/offerings" class="btn btn-outline-primary btn-lg">View All Offerings</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<!-- Include Footer Fragment -->
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

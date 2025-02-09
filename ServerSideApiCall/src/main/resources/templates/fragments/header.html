@@ -1,0 +1,67 @@
+<!-- Header Section -->
+<header class="bg-dark text-white py-3">
+    <div class="container">
+        <div class="row align-items-center">
+            <!-- Logo Section -->
+            <div class="col-lg-3 col-md-4 col-6">
+                <a href="/" class="navbar-brand">
+                    <img src="/images/logo.png" alt="ABC Financial Institution Logo" class="img-fluid" style="max-height: 60px;">
+                </a>
+            </div>
+
+            <!-- Navigation Links -->
+            <div class="col-lg-9 col-md-8 d-none d-md-block">
+                <nav class="navbar navbar-expand-md navbar-dark">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="/offers" class="nav-link text-white text-uppercase font-weight-bold">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/about-us" class="nav-link text-white text-uppercase font-weight-bold">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/resources" class="nav-link text-white text-uppercase font-weight-bold">Resources</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/contact" class="nav-link text-white text-uppercase font-weight-bold">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/login" class="btn btn-outline-light ml-3 rounded-pill px-4">Client Portal</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <div class="col-6 d-md-none text-right">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMobile" aria-controls="navbarMobile" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div class="collapse navbar-collapse" id="navbarMobile">
+        <ul class="navbar-nav bg-dark text-white p-3">
+            <li class="nav-item">
+                <a href="/services" class="nav-link text-white text-uppercase font-weight-bold">Services</a>
+            </li>
+            <li class="nav-item">
+                <a href="/about-us" class="nav-link text-white text-uppercase font-weight-bold">About Us</a>
+            </li>
+            <li class="nav-item">
+                <a href="/resources" class="nav-link text-white text-uppercase font-weight-bold">Resources</a>
+            </li>
+            <li class="nav-item">
+                <a href="/contact" class="nav-link text-white text-uppercase font-weight-bold">Contact</a>
+            </li>
+            <li class="nav-item">
+                <a href="/login" class="btn btn-outline-light mt-2 rounded-pill px-4">Client Portal</a>
+            </li>
+        </ul>
+    </div>
+</header>
+
+<!-- Add any necessary JS files -->
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>

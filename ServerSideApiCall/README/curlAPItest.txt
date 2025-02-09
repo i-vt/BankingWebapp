@@ -1,0 +1,60 @@
+. Register a User:
+
+The registration form sends a POST request to /register. You can simulate this using a curl command like this:
+
+bash
+
+curl -X POST http://localhost:8080/register \
+     -H "Content-Type: application/x-www-form-urlencoded" \
+     -d "username=newUser&email=newuser@example.com&password=123456"
+
+This command sends the form data (username, email, and password) to the /register endpoint.
+2. Login a User:
+
+To test login functionality, you can send a POST request to the /login endpoint:
+
+bash
+
+curl -X POST http://localhost:8080/login \
+     -H "Content-Type: application/x-www-form-urlencoded" \
+     -d "username=newUser&password=123456"
+
+If the login is successful, the server should respond with the appropriate session or redirect the user.
+3. Access Public Pages:
+
+You can test public page access using a simple GET request:
+
+bash
+
+curl http://localhost:8080/public-page
+
+This should return the public page content.
+4. Access Private Pages (Requires Authentication):
+
+Since the private pages require authentication, you'll first need to authenticate and capture the session or cookie. After login, the session cookie will be used to access the private page.
+
+First, login and store the session cookie:
+
+bash
+
+curl -X POST http://localhost:8080/login \
+     -c cookie.txt \
+     -H "Content-Type: application/x-www-form-urlencoded" \
+     -d "username=newUser&password=123456"
+
+Then, use the stored cookie to access the private page:
+
+bash
+
+curl -b cookie.txt http://localhost:8080/private-page
+
+This should allow you to access the private page, provided you're logged in.
+5. Access the H2 Console:
+
+You can access the H2 database console (if enabled) using:
+
+bash
+
+curl http://localhost:8080/h2-console
+
+This opens the H2 database web interface, though accessing it programmatically with curl isn't typical; you'd normally access it via a browser.

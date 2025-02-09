@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Province 701 Financial - Login</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body class="bg-light">
+
+<!-- Include Header Fragment -->
+<div th:replace="fragments/header :: header"></div>
+
+<!-- Fullscreen Background Container -->
+<div class="container-fluid min-vh-100 d-flex justify-content-center align-items-center">
+    <div class="row justify-content-center w-100">
+        <div class="col-md-4">
+
+            <!-- Login Form Card -->
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <h2 class="card-title text-center text-uppercase font-weight-bold mb-4">Login</h2>
+
+                    <!-- Login Form -->
+                    <form th:action="@{/login}" method="post">
+                        <div class="form-group">
+                            <label for="username" class="font-weight-bold">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="font-weight-bold">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+                        </div>
+                        <div class="form-group form-check mb-4">
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">Remember me</label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block">Login</button>
+                    </form>
+
+                    <!-- Forgot Password and Register Links -->
+                    <div class="text-center mt-4">
+                        <a href="/forgot-password" class="text-muted">Forgot your password?</a>
+                    </div>
+                    <div class="text-center mt-2">
+                        <a href="/register" class="text-muted">Don't have an account? Register here</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Home Link -->
+            <div class="text-center mt-4">
+                <a href="/home" class="text-secondary">Return to Home</a>
+            </div>
+
+            <!-- Disclaimer Section -->
+            <div class="text-center mt-3">
+                <p class="text-muted small">
+                    <strong>Important:</strong> Province 701 Financial will <strong>never</strong> call, email, or ask for your login credentials, including your username and password. Please keep your login information secure and do not share it with anyone.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Include Footer Fragment -->
+<div th:replace="fragments/footer :: footer"></div>
+
+<!-- Optional: Adding JS for Bootstrap -->
+<script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
