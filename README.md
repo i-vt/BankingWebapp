@@ -4,7 +4,7 @@
 ## Functionality:
 Simple SpringBoot bank webapp honeypot designed to catch scammers by forcing them to validate their identity prior to withdrawal. The main focus of this project is primarily to target [Overpayment Scam](https://en.wikipedia.org/wiki/Overpayment_scam) perpetrators and those who are trying to empty accounts that do not belong to them.
 
-### ServerSide (Webapp)
+### WebUI
 
 Index:
 ![Screenshot from 2024-11-05 17-43-54](https://github.com/user-attachments/assets/7babb40a-6f56-4266-87fb-08e05a634d25)
